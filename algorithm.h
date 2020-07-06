@@ -43,8 +43,8 @@ namespace grcube3
 		bool operator!=(Algorithm&) const; // Not equal operator
 		Algorithm operator+(Algorithm&); // Algorithm addition operator
 		Algorithm operator+(Steps); // Step addition operator
-        Algorithm& operator+=(Algorithm& rhalg)	{ Append(rhalg); return *this; } // Add algorithm operator
-        Algorithm& operator+=(Steps rhstp) { Append(rhstp); return *this; } // Add step operator
+        	Algorithm& operator+=(Algorithm& rhalg)	{ Append(rhalg); return *this; } // Add algorithm operator
+        	Algorithm& operator+=(Steps rhstp) { Append(rhstp); return *this; } // Add step operator
 		
 		void Clear() { Movs.clear(); } // Clear algorithm
 		bool Erase(const uint); // Erase single movement (step) in given position
@@ -70,7 +70,7 @@ namespace grcube3
 		bool AppendShrink(const Steps stp) { Movs.push_back(stp);  return ShrinkLast(); } // Append given step at the end of the algorithm and shrink it
 		void Append(Algorithm&); // Append given algorithm at the end of the algorithm (no shrink)
 		bool Append(std::string&); // Append given text algorithm at the end of the algorithm (no shrink)
-        void Append(const uint, const Steps = Steps::U, const Steps = Steps::L2); // Append random movements (by default U, D, F, B, R ,L) until get the given size (with shrink)
+        	void Append(const uint, const Steps = Steps::U, const Steps = Steps::L2); // Append random movements (by default U, D, F, B, R ,L) until get the given size (with shrink)
 
 		bool Insert(const uint, const Steps); // Insert given step in given position
 		bool InsertParentheses(const uint, const uint, const uint = 1u); // Surround the given range in parentheses with the given repetitions
