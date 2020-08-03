@@ -22,6 +22,7 @@
 
 #include <iostream>
 #include <random>
+#include <vector>
 
 #include "algorithm.h"
 
@@ -1754,20 +1755,12 @@ namespace grcube3
     	}
     	
 		// Check if there are parentheses and move them to the right position in the algorithm
-		return CorrectParentheses();
-	}
-
-	// If the algortihm steps are inverted, this function corrects the parentheses order
-	bool Algorithm::CorrectParentheses()
-	{
 		int nest;
 		uint j;
-		const uint size = GetSize();
-		Steps AuxStep;
 
-		bool* ParenthesesControl;
-		ParenthesesControl = new bool[size];
-		for (uint i = 0u; i < size; i++) ParenthesesControl[i] = false; // all false by default
+		std::vector<bool> ParenthesesControl;
+
+		for (uint i = 0u; i < size; i++) ParenthesesControl.push_back(false); // all false by default
 
 		for (uint i = 0u; i < size - 1u; i++)
 		{
@@ -1777,11 +1770,7 @@ namespace grcube3
 				for (j = i + 1u; j < size; j++)
 				{
 					if (m_range[static_cast<int>(Movs[j])] == Ranges::PARENTHESES && Movs[j] != Steps::PARENTHESIS_OPEN) nest++;
-					else if (Movs[j] == Steps::PARENTHESIS_OPEN)
-					{
-						nest--;
-						if (nest == 0) break;
-					}
+					else if (Movs[j] == Steps::PARENTHESIS_OPEN) if (--nest == 0) break;
 				}
 				AuxStep = Movs[i];
 				Movs[i] = Movs[j];
@@ -1790,11 +1779,10 @@ namespace grcube3
 				ParenthesesControl[j] = true;
 			}
 		}
-		delete[] ParenthesesControl;
 
 		return true;
 	}
-	
+
 	// Changes every movement for the invert one
 	void Algorithm::TransformInvert()
 	{

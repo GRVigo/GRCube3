@@ -36,15 +36,15 @@ namespace grcube3
         // Default constructor
         Cube() { spin = Spins::Default; } // UF
 
-		// Algorithm constructor (develop algorithm parentheses)
-		Cube(Algorithm& A)
+        // Algorithm constructor (develop algorithm parentheses)
+        Cube(Algorithm& A)
 		{ 
 			spin = Spins::Default;
-			if (!ApplyAlgorithm(A))
-			{ // Algorithm have parentheses with more than one repetition, must be developed
-				Algorithm Aux = A.GetDeveloped(false);
-				ApplyAlgorithm(Aux);
-			}
+            if (!ApplyAlgorithm(A))
+            { // Algorithm have parentheses with more than one repetition, must be developed
+                Algorithm Aux = A.GetDeveloped(false);
+                ApplyAlgorithm(Aux);
+            }
 		}
 		
         // Get corners status
