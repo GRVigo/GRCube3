@@ -1,5 +1,7 @@
 # GRCube3
-C++ classes for 3x3x3 Rubik's cube
+C++ classes for 3x3x3 Rubik's cube.
+
+The objective of this code is to search for algorithms that solve the cube, so that it is as fast as possible.
 
 To understand this code you must be familiar with the [notation of the rubik's cube](https://ruwix.com/the-rubiks-cube/notation/).
 
@@ -32,8 +34,8 @@ if (C1 != C2) { ... } // Check if two cubes are in the different condition
 ## Checking the cube status
 ```
 if (C1.IsSolved()) { ... } // Check if the cube is in his solve condition
-if (C1.IsSolved(Pieces::UFR) { ... } // Check if the piece UFR is in his solve position and has his correct direction
-if (C1.IsSolved(Layers::F) { ... } // Check if all the pieces in front layer are solved
+if (C1.IsSolved(Pieces::UFR) { ... } // Check if the piece UFR (Up, Front, Right) is in his solve position and has his correct direction
+if (C1.IsSolved(Layers::F) { ... } // Check if all the pieces in front layer (F) are solved
 ```
 
 ## Making movements to the cubes
@@ -43,6 +45,5 @@ C.U(); // Move the layer U 90 degrees in clock-wise direction
 
 You can use U, U2, Up (as U'), D, D2, ... movements. Also x, x2, xp (as x'), y, y2, yp, z, z2 and zp turns are implemented.
 
-```
 
 # TODO: This document should be completed!!!
