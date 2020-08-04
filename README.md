@@ -66,7 +66,7 @@ if (C1.IsSolved(Pieces::UFR) { ... } // Check if the piece UFR (Up, Front, Right
 if (C1.IsSolved(Layers::F) { ... } // Check if all the pieces in front layer (F) are solved
 ```
 
-## Making movements to the cubes
+## Making movements to the cube
 ```
 C.U(); // Move the layer U 90 degrees in clock-wise direction
 ```
@@ -76,3 +76,15 @@ Algorithm A("U F' R2 L D' F B' R2 D2 L"); // Creates an algorithm with the given
 C.Reset(); // Cube to his solve condition
 C.ApplyAlgorithm(A); // Apply the algorithm to the cube
 ```
+
+## Getting cube status to draw it
+
+You can get the face of the sticker in each position. As each face has his own color you can draw it.
+
+```
+Faces Face_UF_U = GetFace(StickerPositions::UF_U); // Get the face of the upper sticker in the up/front edge
+
+Faces Face_DBL_B = GetFace(StickerPositions::DBL_B); // Get the face of the back sticker in the down/back/left corner
+```
+
+For example, if Face_UF_U == Faces::L, this sticker will be orange (usually the left face is that color).
