@@ -3,7 +3,7 @@ C++ classes for 3x3x3 Rubik's cube.
 
 The objective of this code is to search for algorithms that solve the cube, so that it is as fast as possible.
 
-This classes can be easily integrating into other programs.
+These classes can be easily integrating into other programs.
 
 To understand this code you must be familiar with the [notation of the rubik's cube](https://ruwix.com/the-rubiks-cube/notation/).
 
