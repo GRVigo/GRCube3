@@ -81,7 +81,7 @@ C.ApplyAlgorithm(A); // Apply the algorithm to the cube
 
 ## Getting cube status to draw it
 
-You can get the face of the sticker in each position. As each face has his own color you can draw it.
+You can get the face of a sticker in each position. As each face has his own color you can draw it.
 
 ```
 Faces Face_UF_U = GetFace(StickerPositions::UF_U); // Get the face of the upper sticker in the up/front edge
