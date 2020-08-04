@@ -88,3 +88,5 @@ Faces Face_DBL_B = GetFace(StickerPositions::DBL_B); // Get the face of the back
 ```
 
 For example, if Face_UF_U == Faces::L, this sticker will be orange (usually the left face is that color).
+
+# Check out the code for many more features!!!
