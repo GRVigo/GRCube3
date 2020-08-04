@@ -7,7 +7,35 @@ To understand this code you must be familiar with the [notation of the rubik's c
 
 ![headshot](Cube.png)
 
-# How to use these classes (most important features)
+# Solve a cube using CFOP method
+```
+#include "cfop.h" // CFOP method header
+
+...
+
+Algorithm Scramble(25); // Random scramble with 25 optimized movements	
+CFOP SearchCFOP(Scramble); // Creates the search
+
+// Crosses to search as pieces groups - we will search the best cross in all faces
+std::vector<PiecesGroups> Crosses =
+{
+  PiecesGroups::C_U, // Four edges in up face
+  PiecesGroups::C_D, // Four edges in down face
+  PiecesGroups::C_F, // Four edges in front face
+  PiecesGroups::C_B, // Four edges in back face
+  PiecesGroups::C_R, // Four edges in right face
+  PiecesGroups::C_L  // Four edges in left face
+};
+
+SearchCFOP.SearchCross(6, Crosses); // Search best cross in 6 movements or less
+SearchCFOP.SearchF2L(); // Complete the search for the first two layers
+SearchCFOP.SearchOLL(); // Search OLL algorithm
+SearchCFOP.SearchPLL(); // Search PLL algorithm
+
+std::cout << SearchCFOP.GetReport() << endl; // Get the search report
+```
+
+# How to use Cube and Algorithm classes (most important features)
 
 ## Creating a cube
 ```
@@ -42,8 +70,9 @@ if (C1.IsSolved(Layers::F) { ... } // Check if all the pieces in front layer (F)
 ```
 C.U(); // Move the layer U 90 degrees in clock-wise direction
 ```
-
 You can use U, U2, Up (as U'), D, D2, ... movements. Also x, x2, xp (as x'), y, y2, yp, z, z2 and zp turns are implemented.
-
-
-# TODO: This document should be completed!!!
+```
+Algorithm A("U F' R2 L D' F B' R2 D2 L"); // Creates an algorithm with the given movements
+C.Reset(); // Cube to his solve condition
+C.ApplyAlgorithm(A); // Apply the algorithm to the cube
+```
