@@ -85,17 +85,17 @@ namespace grcube3
 		bool Shrink(); // Returns false if the algorithm is shrinked; if returns true apply shrink again
 		bool ShrinkLast(); // Shrinks last step only
 
-		bool Transform_x(); // Transform the algorithm applying an x turn
-		bool Transform_xp(); // Transform the algorithm applying an x' turn
-		bool Transform_x2(); // Transform the algorithm applying an x2 turn
-		bool Transform_y(); // Transform the algorithm applying an y turn
-		bool Transform_yp(); // Transform the algorithm applying an y' turn
-		bool Transform_y2(); // Transform the algorithm applying an y2 turn
-		bool Transform_z(); // Transform the algorithm applying an z turn
-		bool Transform_zp(); // Transform the algorithm applying an z' turn
-		bool Transform_z2(); // Transform the algorithm applying an z2 turn
+		void Transform_x() { for (auto& S : Movs) S = m_x[static_cast<int>(S)];	} // Transform the algorithm applying an x turn
+		void Transform_xp() { for (auto& S : Movs) S = m_xp[static_cast<int>(S)]; } // Transform the algorithm applying an x' turn
+		void Transform_x2() { for (auto& S : Movs) S = m_x2[static_cast<int>(S)]; } // Transform the algorithm applying an x2 turn
+		void Transform_y() { for (auto& S : Movs) S = m_y[static_cast<int>(S)]; } // Transform the algorithm applying an y turn
+		void Transform_yp() { for (auto& S : Movs) S = m_yp[static_cast<int>(S)]; } // Transform the algorithm applying an y' turn
+		void Transform_y2() { for (auto& S : Movs) S = m_y2[static_cast<int>(S)]; } // Transform the algorithm applying an y2 turn
+		void Transform_z() { for (auto& S : Movs) S = m_z[static_cast<int>(S)]; } // Transform the algorithm applying an z turn
+		void Transform_zp() { for (auto& S : Movs) S = m_zp[static_cast<int>(S)]; } // Transform the algorithm applying an z' turn
+		void Transform_z2() { for (auto& S : Movs) S = m_z2[static_cast<int>(S)]; } // Transform the algorithm applying an z2 turn
 
-		bool TransformTurn(const Steps); // Transform the algorithm applying the given turn
+		void TransformTurn(const Steps); // Transform the algorithm applying the given turn
 
 		bool Transform_x(const uint, const uint); // Transform the algorithm applying an x turn to the specified range of steps
 		bool Transform_xp(const uint, const uint); // Transform the algorithm applying an x' turn to the specified range of steps

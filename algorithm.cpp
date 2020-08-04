@@ -1448,120 +1448,21 @@ namespace grcube3
 		return SA;
 	}
 
-	// Transform the algorithm applying an x turn
-	bool Algorithm::Transform_x()
-	{
-		if (GetSize() > 0u && CheckParentheses())
-		{
-			for (auto& S : Movs) S = m_x[static_cast<int>(S)];
-			return true;
-		}
-		return false;
-	}
-
-	// Transform the algorithm applying an x' turn
-	bool Algorithm::Transform_xp()
-	{
-		if (GetSize() > 0u && CheckParentheses())
-		{
-			for (auto& S : Movs) S = m_xp[static_cast<int>(S)];
-			return true;
-		}
-		return false;
-	}
-
-	// Transform the algorithm applying an x2 turn
-	bool Algorithm::Transform_x2()
-	{
-		if (GetSize() > 0u && CheckParentheses())
-		{
-			for (auto& S : Movs) S = m_x2[static_cast<int>(S)];
-			return true;
-		}
-		return false;
-	}
-
-	// Transform the algorithm applying an y turn
-	bool Algorithm::Transform_y()
-	{
-		if (GetSize() > 0u && CheckParentheses())
-		{
-			for (auto& S : Movs) S = m_y[static_cast<int>(S)];
-			return true;
-		}
-		return false;
-	}
-
-	// Transform the algorithm applying an y' turn
-	bool Algorithm::Transform_yp()
-	{
-		if (GetSize() > 0u && CheckParentheses())
-		{
-			for (auto& S : Movs) S = m_yp[static_cast<int>(S)];
-			return true;
-		}
-		return false;
-	}
-
-	// Transform the algorithm applying an y2 turn
-	bool Algorithm::Transform_y2()
-	{
-		if (GetSize() > 0u && CheckParentheses())
-		{
-			for (auto& S : Movs) S = m_y2[static_cast<int>(S)];
-			return true;
-		}
-		return false;
-	}
-
-	// Transform the algorithm applying a z turn
-	bool Algorithm::Transform_z()
-	{
-		if (GetSize() > 0u && CheckParentheses())
-		{
-			for (auto& S : Movs) S = m_z[static_cast<int>(S)];
-			return true;
-		}
-		return false;
-	}
-
-	// Transform the algorithm applying a z' turn
-	bool Algorithm::Transform_zp()
-	{
-		if (GetSize() > 0u && CheckParentheses())
-		{
-			for (auto& S : Movs) S = m_zp[static_cast<int>(S)];
-			return true;
-		}
-		return false;
-	}
-
-	// Transform the algorithm applying a z2 turn
-	bool Algorithm::Transform_z2()
-	{
-		if (GetSize() > 0u && CheckParentheses())
-		{
-			for (auto& S : Movs) S = m_z2[static_cast<int>(S)];
-			return true;
-		}
-		return false;
-	}
-
 	// Transform the algorithm applying the given turn
-	bool Algorithm::TransformTurn(const Steps T)
+	void Algorithm::TransformTurn(const Steps T)
 	{
 		switch (T)
 		{
-		case Steps::x: return Transform_x();
-		case Steps::xp: return Transform_xp();
-		case Steps::x2: return Transform_x2();
-		case Steps::y: return Transform_y();
-		case Steps::yp: return Transform_yp();
-		case Steps::y2: return Transform_y2();
-		case Steps::z: return Transform_z();
-		case Steps::zp: return Transform_zp();
-		case Steps::z2: return Transform_z2();
-		default: return false;
+		case Steps::x: Transform_x(); break;
+		case Steps::xp: Transform_xp(); break;
+		case Steps::x2: Transform_x2(); break;
+		case Steps::y: Transform_y(); break;
+		case Steps::yp: Transform_yp(); break;
+		case Steps::y2: Transform_y2(); break;
+		case Steps::z: Transform_z(); break;
+		case Steps::zp: Transform_zp(); break;
+		case Steps::z2: Transform_z2(); break;
+		default: break;
 		}
 	}
 
