@@ -548,14 +548,14 @@ namespace grcube3
 		{ Steps::R2, Steps::x2, Steps::NONE },     // l2
 	
 		// Middle layers
-		{ Steps::Up, Steps::D, Steps::y },         // E
-		{ Steps::U, Steps::Dp, Steps::yp },        // E'
+		{ Steps::U, Steps::Dp, Steps::yp },        // E -> As layer D
+		{ Steps::Up, Steps::D, Steps::y },         // E'
 		{ Steps::U2, Steps::D2, Steps::y2 },       // E2
-		{ Steps::Fp, Steps::B, Steps::z },         // S
+		{ Steps::Fp, Steps::B, Steps::z },         // S -> As layer F
 		{ Steps::F, Steps::Bp, Steps::zp },        // S'
 		{ Steps::F2, Steps::B2, Steps::z2 },       // S2
-		{ Steps::Rp, Steps::L, Steps::x },         // M
-		{ Steps::R, Steps::Lp, Steps::xp },        // M'
+		{ Steps::R, Steps::Lp, Steps::xp },        // M -> As layer L
+		{ Steps::Rp, Steps::L, Steps::x },         // M'
 		{ Steps::R2, Steps::L2, Steps::x2 },       // M2
 	
 		// Full cube
@@ -712,13 +712,13 @@ namespace grcube3
 	};
 	
 	// Array with allowed chars in an algorithm
-	constexpr auto m_chars_SIZE = 30;
+	constexpr auto m_chars_SIZE = 33;
 	const char Algorithm::m_chars[m_chars_SIZE] = 
 	{ 
 		'U', 'D', 'F', 'B', 'R', 'L',
 		'u', 'd', 'f', 'b', 'r', 'l', 'w',
 		'E', 'S', 'M',
-		'x', 'y', 'z',
+		'x', 'y', 'z', 'X', 'Y', 'Z',
 		'\'', 
 		'(', ')',
 		'2', '3', '4', '5', '6', '7', '8', '9'
@@ -1070,7 +1070,10 @@ namespace grcube3
 			{
 				if (s[i] == m_chars[j])
 				{ // Allowed char detected
-					clean_s.push_back(m_chars[j]);
+					if (s[i] == 'X') clean_s.push_back('x'); // Turns in lower case
+					else if (s[i] == 'Y') clean_s.push_back('y');
+					else if (s[i] == 'Z') clean_s.push_back('z');
+					else clean_s.push_back(m_chars[j]);
 					break;
 				}
 			}
@@ -1367,7 +1370,7 @@ namespace grcube3
 					if (++i < size)
 					{
 						if (Movs[i] == Steps::PARENTHESIS_OPEN) nesting++;
-						else if (m_range[i] == Ranges::PARENTHESES) nesting--;
+						else if (m_range[static_cast<int>(Movs[i])] == Ranges::PARENTHESES) nesting--;
 
 						if (nesting == 0)
 						{
@@ -1425,22 +1428,20 @@ namespace grcube3
 			{
 				int nesting = 1;
 				Algorithm aux;
-				while (nesting > 0 && i++ < size)
+				while (nesting > 0 && ++i < size)
 				{
 					iStep = static_cast<int>(Movs[i]);
-					if (i != size - 1u)
-					{
-						if (Movs[i] == Steps::PARENTHESIS_OPEN) nesting++;
-						else if (m_range[iStep] == Ranges::PARENTHESES) nesting--;
 
-						if (nesting == 0)
-							for (int n = 0; n < iStep - static_cast<int>(Steps::PARENTHESIS_OPEN); n++)
-							{
-								Algorithm aux_s = aux.GetSimplified();
-								SA.Append(aux_s);
-							}
-						else aux.Append(Movs[i]);
-					}
+					if (Movs[i] == Steps::PARENTHESIS_OPEN) nesting++;
+					else if (m_range[iStep] == Ranges::PARENTHESES) nesting--;
+
+					if (nesting == 0)
+						for (int n = 0; n < iStep - static_cast<int>(Steps::PARENTHESIS_OPEN); n++)
+						{
+							Algorithm aux_s = aux.GetSimplified();
+							SA.Append(aux_s);
+						}
+					else aux.Append(Movs[i]);
 				}
 			}
 		}
@@ -1702,7 +1703,25 @@ namespace grcube3
 	{
 		for (auto& S : Movs) S = m_symmetrical[static_cast<int>(S)];
 	}
-	
+
+	// Change M to M' and M' to M
+	void Algorithm::TransformInvertMSteps()
+	{
+		for (auto& S : Movs) if (S == Steps::M || S == Steps::Mp) S = m_inverted[static_cast<int>(S)];
+	}
+
+	// Change E to E' and E' to E
+	void Algorithm::TransformInvertESteps()
+	{
+		for (auto& S : Movs) if (S == Steps::E || S == Steps::Ep) S = m_inverted[static_cast<int>(S)];
+	}
+
+	// Change S to S' and S' to S
+	void Algorithm::TransformInvertSSteps()
+	{
+		for (auto& S : Movs) if (S == Steps::S || S == Steps::Sp) S = m_inverted[static_cast<int>(S)];
+	}
+
     // Remove x, y and z turns from the algorithm (maintaining the functionality)
     // Algorithm must be simplified.
     Algorithm Algorithm::GetWithoutTurns() const

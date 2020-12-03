@@ -114,6 +114,9 @@ namespace grcube3
 		void TransformInvert(); // Changes every movement for the invert one
 		bool TransformReverseInvert(); // Changes the steps order and every movement for the invert one
 		void TransformSymmetrical(); // Changes every movement for the symmetrical one
+		void TransformInvertMSteps(); // Change M to M' and M' to M
+		void TransformInvertESteps(); // Change E to E' and E' to E
+		void TransformInvertSSteps(); // Change S to S' and S' to S
 
 		// Gets the close parenthesis step with given repetitions
 		static Steps GetCloseParenthesis(const uint rep = 1u)

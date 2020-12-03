@@ -25,31 +25,60 @@
 namespace grcube3
 {
 	const Spins Cube::s_Spins[24][9] = // Array to follow spins when a cube has a turn (24x9 elements array)
-	{ //      x          x2         xp         y          y2         yp         z          z2         zp
-	    { Spins::FD, Spins::DB, Spins::BU, Spins::UR, Spins::UB, Spins::UL, Spins::LF, Spins::DF, Spins::RF }, // UF
-	    { Spins::RD, Spins::DL, Spins::LU, Spins::UB, Spins::UL, Spins::UF, Spins::FR, Spins::DR, Spins::BR }, // UR
-	    { Spins::BD, Spins::DF, Spins::FU, Spins::UL, Spins::UF, Spins::UR, Spins::RB, Spins::DB, Spins::LB }, // UB
-	    { Spins::LD, Spins::DR, Spins::RU, Spins::UF, Spins::UR, Spins::UB, Spins::BL, Spins::DL, Spins::FL }, // UL
-	    { Spins::FU, Spins::UB, Spins::BD, Spins::DL, Spins::DB, Spins::DR, Spins::RF, Spins::UF, Spins::LF }, // DF
-	    { Spins::RU, Spins::UL, Spins::LD, Spins::DF, Spins::DL, Spins::DB, Spins::BR, Spins::UR, Spins::FR }, // DR
-	    { Spins::BU, Spins::UF, Spins::FD, Spins::DR, Spins::DF, Spins::DL, Spins::LB, Spins::UB, Spins::RB }, // DB
-	    { Spins::LU, Spins::UR, Spins::RD, Spins::DB, Spins::DR, Spins::DF, Spins::FL, Spins::UL, Spins::BL }, // DL
-	    { Spins::UB, Spins::BD, Spins::DF, Spins::FL, Spins::FD, Spins::FR, Spins::RU, Spins::BU, Spins::LU }, // FU
-	    { Spins::RB, Spins::BL, Spins::LF, Spins::FU, Spins::FL, Spins::FD, Spins::DR, Spins::BR, Spins::UR }, // FR
-	    { Spins::DB, Spins::BU, Spins::UF, Spins::FR, Spins::FU, Spins::FL, Spins::LD, Spins::BD, Spins::RD }, // FD
-	    { Spins::LB, Spins::BR, Spins::RF, Spins::FD, Spins::FR, Spins::FU, Spins::UL, Spins::BL, Spins::DL }, // FL
-	    { Spins::UF, Spins::FD, Spins::DB, Spins::BR, Spins::BD, Spins::BL, Spins::LU, Spins::FU, Spins::RU }, // BU
-	    { Spins::RF, Spins::FL, Spins::LB, Spins::BD, Spins::BL, Spins::BU, Spins::UR, Spins::FR, Spins::DR }, // BR
-	    { Spins::DF, Spins::FU, Spins::UB, Spins::BL, Spins::BU, Spins::BR, Spins::RD, Spins::FD, Spins::LD }, // BD
-	    { Spins::LF, Spins::FR, Spins::RB, Spins::BU, Spins::BR, Spins::BD, Spins::DL, Spins::FL, Spins::UL }, // BL
-	    { Spins::UL, Spins::LD, Spins::DR, Spins::RF, Spins::RD, Spins::RB, Spins::BU, Spins::LU, Spins::FU }, // RU
-	    { Spins::FL, Spins::LB, Spins::BR, Spins::RD, Spins::RB, Spins::RU, Spins::UF, Spins::LF, Spins::DF }, // RF
-	    { Spins::DL, Spins::LU, Spins::UR, Spins::RB, Spins::RU, Spins::RF, Spins::FD, Spins::LD, Spins::BD }, // RD
-	    { Spins::BL, Spins::LF, Spins::FR, Spins::RU, Spins::RF, Spins::RD, Spins::DB, Spins::LB, Spins::UB }, // RB
-	    { Spins::UR, Spins::RD, Spins::DL, Spins::LB, Spins::LD, Spins::LF, Spins::FU, Spins::RU, Spins::BU }, // LU
-	    { Spins::FR, Spins::RB, Spins::BL, Spins::LU, Spins::LB, Spins::LD, Spins::DF, Spins::RF, Spins::UF }, // LF
-	    { Spins::DR, Spins::RU, Spins::UL, Spins::LF, Spins::LU, Spins::LB, Spins::BD, Spins::RD, Spins::FD }, // LD
-	    { Spins::BR, Spins::RF, Spins::FL, Spins::LD, Spins::LF, Spins::LU, Spins::UB, Spins::RB, Spins::DB }  // LB
+	{ //      x          xp         x2         y          yp         y2         z          zp         z2
+		{ Spins::FD, Spins::BU, Spins::DB, Spins::UR, Spins::UL, Spins::UB, Spins::LF, Spins::RF, Spins::DF }, // UF
+		{ Spins::RD, Spins::LU, Spins::DL, Spins::UB, Spins::UF, Spins::UL, Spins::FR, Spins::BR, Spins::DR }, // UR
+		{ Spins::BD, Spins::FU, Spins::DF, Spins::UL, Spins::UR, Spins::UF, Spins::RB, Spins::LB, Spins::DB }, // UB
+		{ Spins::LD, Spins::RU, Spins::DR, Spins::UF, Spins::UB, Spins::UR, Spins::BL, Spins::FL, Spins::DL }, // UL
+		{ Spins::FU, Spins::BD, Spins::UB, Spins::DL, Spins::DR, Spins::DB, Spins::RF, Spins::LF, Spins::UF }, // DF
+		{ Spins::RU, Spins::LD, Spins::UL, Spins::DF, Spins::DB, Spins::DL, Spins::BR, Spins::FR, Spins::UR }, // DR
+		{ Spins::BU, Spins::FD, Spins::UF, Spins::DR, Spins::DL, Spins::DF, Spins::LB, Spins::RB, Spins::UB }, // DB
+		{ Spins::LU, Spins::RD, Spins::UR, Spins::DB, Spins::DF, Spins::DR, Spins::FL, Spins::BL, Spins::UL }, // DL
+		{ Spins::UB, Spins::DF, Spins::BD, Spins::FL, Spins::FR, Spins::FD, Spins::RU, Spins::LU, Spins::BU }, // FU
+		{ Spins::RB, Spins::LF, Spins::BL, Spins::FU, Spins::FD, Spins::FL, Spins::DR, Spins::UR, Spins::BR }, // FR
+		{ Spins::DB, Spins::UF, Spins::BU, Spins::FR, Spins::FL, Spins::FU, Spins::LD, Spins::RD, Spins::BD }, // FD
+		{ Spins::LB, Spins::RF, Spins::BR, Spins::FD, Spins::FU, Spins::FR, Spins::UL, Spins::DL, Spins::BL }, // FL
+		{ Spins::UF, Spins::DB, Spins::FD, Spins::BR, Spins::BL, Spins::BD, Spins::LU, Spins::RU, Spins::FU }, // BU
+		{ Spins::RF, Spins::LB, Spins::FL, Spins::BD, Spins::BU, Spins::BL, Spins::UR, Spins::DR, Spins::FR }, // BR
+		{ Spins::DF, Spins::UB, Spins::FU, Spins::BL, Spins::BR, Spins::BU, Spins::RD, Spins::LD, Spins::FD }, // BD
+		{ Spins::LF, Spins::RB, Spins::FR, Spins::BU, Spins::BD, Spins::BR, Spins::DL, Spins::UL, Spins::FL }, // BL
+		{ Spins::UL, Spins::DR, Spins::LD, Spins::RF, Spins::RB, Spins::RD, Spins::BU, Spins::FU, Spins::LU }, // RU
+		{ Spins::FL, Spins::BR, Spins::LB, Spins::RD, Spins::RU, Spins::RB, Spins::UF, Spins::DF, Spins::LF }, // RF
+		{ Spins::DL, Spins::UR, Spins::LU, Spins::RB, Spins::RF, Spins::RU, Spins::FD, Spins::BD, Spins::LD }, // RD
+		{ Spins::BL, Spins::FR, Spins::LF, Spins::RU, Spins::RD, Spins::RF, Spins::DB, Spins::UB, Spins::LB }, // RB
+		{ Spins::UR, Spins::DL, Spins::RD, Spins::LB, Spins::LF, Spins::LD, Spins::FU, Spins::BU, Spins::RU }, // LU
+		{ Spins::FR, Spins::BL, Spins::RB, Spins::LU, Spins::LD, Spins::LB, Spins::DF, Spins::UF, Spins::RF }, // LF
+		{ Spins::DR, Spins::UL, Spins::RU, Spins::LF, Spins::LB, Spins::LU, Spins::BD, Spins::FD, Spins::RD }, // LD
+		{ Spins::BR, Spins::FL, Spins::RF, Spins::LD, Spins::LU, Spins::LF, Spins::UB, Spins::DB, Spins::RB }  // LB
+	};
+
+	// Two turns array for get a final spin from an inital spin [Start spin][Final spin][Turns to pass from start to final spin]
+	const Steps Cube::s_Turns[24][24][2] =
+	{ //			UF							UR								UB							UL								DF							DR								DB							DL								FU							FR								FD							FL								BU							BR								BD							BL								RU							RF								RD							RB								LU							LF								LD							LB
+	{ { Steps::NONE, Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::z2,   Steps::NONE }, { Steps::y,    Steps::z2 },   { Steps::x2,   Steps::NONE }, { Steps::y,    Steps::x2 },   { Steps::y2,   Steps::xp },   { Steps::y,    Steps::z },    { Steps::x,    Steps::NONE }, { Steps::yp,   Steps::z },    { Steps::xp,   Steps::NONE }, { Steps::y,    Steps::z },    { Steps::y2,   Steps::x },    { Steps::yp,   Steps::z },    { Steps::yp,   Steps::xp },   { Steps::zp,   Steps::NONE }, { Steps::y,    Steps::x },    { Steps::y2,   Steps::z },    { Steps::y,    Steps::xp },   { Steps::z,    Steps::NONE }, { Steps::yp,   Steps::x },    { Steps::y2,   Steps::zp },  }, 	// UF
+	{ { Steps::yp,   Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::yp,   Steps::z2 },   { Steps::z2,   Steps::NONE }, { Steps::yp,   Steps::x2 },   { Steps::x2,   Steps::NONE }, { Steps::y,    Steps::xp },   { Steps::z,    Steps::NONE }, { Steps::yp,   Steps::x },    { Steps::y2,   Steps::z },    { Steps::yp,   Steps::xp },   { Steps::zp,   Steps::NONE }, { Steps::y,    Steps::x },    { Steps::y2,   Steps::z },    { Steps::y2,   Steps::xp },   { Steps::yp,   Steps::z },    { Steps::x,    Steps::NONE }, { Steps::y,    Steps::z },    { Steps::xp,   Steps::NONE }, { Steps::yp,   Steps::z },    { Steps::y2,   Steps::x },    { Steps::y,    Steps::zp },  }, 	// UR
+	{ { Steps::y2,   Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::x2,   Steps::NONE }, { Steps::yp,   Steps::z2 },   { Steps::z2,   Steps::NONE }, { Steps::yp,   Steps::x2 },   { Steps::xp,   Steps::NONE }, { Steps::yp,   Steps::z },    { Steps::y2,   Steps::x },    { Steps::y,    Steps::z },    { Steps::y2,   Steps::xp },   { Steps::yp,   Steps::z },    { Steps::x,    Steps::NONE }, { Steps::y,    Steps::z },    { Steps::y,    Steps::xp },   { Steps::y2,   Steps::z },    { Steps::yp,   Steps::x },    { Steps::z,    Steps::NONE }, { Steps::yp,   Steps::xp },   { Steps::y2,   Steps::z },    { Steps::y,    Steps::x },    { Steps::zp,   Steps::NONE },  }, 	// UB
+	{ { Steps::y,    Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::y,    Steps::z2 },   { Steps::x2,   Steps::NONE }, { Steps::y,    Steps::x2 },   { Steps::z2,   Steps::NONE }, { Steps::yp,   Steps::xp },   { Steps::y2,   Steps::z },    { Steps::y,    Steps::x },    { Steps::zp,   Steps::NONE }, { Steps::y,    Steps::xp },   { Steps::y2,   Steps::z },    { Steps::yp,   Steps::x },    { Steps::z,    Steps::NONE }, { Steps::xp,   Steps::NONE }, { Steps::y,    Steps::z },    { Steps::y2,   Steps::x },    { Steps::yp,   Steps::z },    { Steps::y2,   Steps::xp },   { Steps::y,    Steps::z },    { Steps::x,    Steps::NONE }, { Steps::yp,   Steps::zp },  }, 	// UL
+	{ { Steps::z2,   Steps::NONE }, { Steps::z2,   Steps::y },    { Steps::x2,   Steps::NONE }, { Steps::z2,   Steps::yp },   { Steps::NONE, Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::x,    Steps::NONE }, { Steps::yp,   Steps::z },    { Steps::z2,   Steps::x },    { Steps::y,    Steps::z },    { Steps::z2,   Steps::xp },   { Steps::yp,   Steps::z },    { Steps::xp,   Steps::NONE }, { Steps::y,    Steps::z },    { Steps::yp,   Steps::x },    { Steps::z,    Steps::NONE }, { Steps::y,    Steps::xp },   { Steps::x2,   Steps::z },    { Steps::y,    Steps::x },    { Steps::zp,   Steps::NONE }, { Steps::yp,   Steps::xp },   { Steps::x2,   Steps::zp },  }, 	// DF
+	{ { Steps::z2,   Steps::yp },   { Steps::z2,   Steps::NONE }, { Steps::z2,   Steps::y },    { Steps::x2,   Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::y,    Steps::x },    { Steps::zp,   Steps::NONE }, { Steps::yp,   Steps::xp },   { Steps::x2,   Steps::z },    { Steps::yp,   Steps::x },    { Steps::z,    Steps::NONE }, { Steps::y,    Steps::xp },   { Steps::x2,   Steps::z },    { Steps::x,    Steps::NONE }, { Steps::y,    Steps::z },    { Steps::z2,   Steps::x },    { Steps::yp,   Steps::z },    { Steps::z2,   Steps::xp },   { Steps::y,    Steps::z },    { Steps::xp,   Steps::NONE }, { Steps::yp,   Steps::z },  }, 		// DR
+	{ { Steps::x2,   Steps::NONE }, { Steps::x2,   Steps::y },    { Steps::z2,   Steps::NONE }, { Steps::x2,   Steps::yp },   { Steps::y2,   Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::z2,   Steps::xp },   { Steps::y,    Steps::z },    { Steps::xp,   Steps::NONE }, { Steps::yp,   Steps::z },    { Steps::x,    Steps::NONE }, { Steps::y,    Steps::z },    { Steps::z2,   Steps::x },    { Steps::yp,   Steps::z },    { Steps::y,    Steps::x },    { Steps::x2,   Steps::z },    { Steps::yp,   Steps::xp },   { Steps::zp,   Steps::NONE }, { Steps::yp,   Steps::x },    { Steps::x2,   Steps::z },    { Steps::y,    Steps::xp },   { Steps::z,    Steps::NONE },  }, 	// DB
+	{ { Steps::x2,   Steps::yp },   { Steps::x2,   Steps::NONE }, { Steps::x2,   Steps::y },    { Steps::z2,   Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::yp,   Steps::x },    { Steps::x2,   Steps::z },    { Steps::y,    Steps::xp },   { Steps::z,    Steps::NONE }, { Steps::y,    Steps::x },    { Steps::x2,   Steps::z },    { Steps::yp,   Steps::xp },   { Steps::zp,   Steps::NONE }, { Steps::z2,   Steps::xp },   { Steps::yp,   Steps::z },    { Steps::xp,   Steps::NONE }, { Steps::y,    Steps::z },    { Steps::x,    Steps::NONE }, { Steps::yp,   Steps::z },    { Steps::z2,   Steps::x },    { Steps::y,    Steps::z },  }, 		// DL
+	{ { Steps::x,    Steps::y2 },   { Steps::x,    Steps::yp },   { Steps::x,    Steps::NONE }, { Steps::x,    Steps::y },    { Steps::xp,   Steps::NONE }, { Steps::xp,   Steps::yp },   { Steps::x,    Steps::z2 },   { Steps::xp,   Steps::y },    { Steps::NONE, Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::z2,   Steps::NONE }, { Steps::yp,   Steps::z2 },   { Steps::x2,   Steps::NONE }, { Steps::yp,   Steps::x2 },   { Steps::z,    Steps::NONE }, { Steps::xp,   Steps::z },    { Steps::y2,   Steps::z },    { Steps::x,    Steps::z },    { Steps::zp,   Steps::NONE }, { Steps::xp,   Steps::z },    { Steps::y2,   Steps::z },    { Steps::x,    Steps::zp },  }, 	// FU
+	{ { Steps::zp,   Steps::yp },   { Steps::zp,   Steps::NONE }, { Steps::zp,   Steps::y },    { Steps::zp,   Steps::y2 },   { Steps::z,    Steps::y },    { Steps::z,    Steps::NONE }, { Steps::z,    Steps::yp },   { Steps::zp,   Steps::x2 },   { Steps::y,    Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::y,    Steps::z2 },   { Steps::z2,   Steps::NONE }, { Steps::y,    Steps::x2 },   { Steps::x2,   Steps::NONE }, { Steps::z,    Steps::x },    { Steps::y2,   Steps::xp },   { Steps::zp,   Steps::x },    { Steps::x,    Steps::NONE }, { Steps::zp,   Steps::xp },   { Steps::xp,   Steps::NONE }, { Steps::z,    Steps::xp },   { Steps::y2,   Steps::x },  }, 		// FR
+	{ { Steps::xp,   Steps::NONE }, { Steps::xp,   Steps::y },    { Steps::xp,   Steps::y2 },   { Steps::xp,   Steps::yp },   { Steps::xp,   Steps::z2 },   { Steps::x,    Steps::y },    { Steps::x,    Steps::NONE }, { Steps::x,    Steps::yp },   { Steps::y2,   Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::x2,   Steps::NONE }, { Steps::y,    Steps::z2 },   { Steps::z2,   Steps::NONE }, { Steps::y,    Steps::x2 },   { Steps::y2,   Steps::z },    { Steps::xp,   Steps::z },    { Steps::zp,   Steps::NONE }, { Steps::x,    Steps::z },    { Steps::y2,   Steps::z },    { Steps::xp,   Steps::z },    { Steps::z,    Steps::NONE }, { Steps::x,    Steps::z },  }, 		// FD
+	{ { Steps::z,    Steps::y },    { Steps::z,    Steps::y2 },   { Steps::z,    Steps::yp },   { Steps::z,    Steps::NONE }, { Steps::zp,   Steps::yp },   { Steps::z,    Steps::x2 },   { Steps::zp,   Steps::y },    { Steps::zp,   Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::yp,   Steps::z2 },   { Steps::x2,   Steps::NONE }, { Steps::yp,   Steps::x2 },   { Steps::z2,   Steps::NONE }, { Steps::z,    Steps::xp },   { Steps::xp,   Steps::NONE }, { Steps::zp,   Steps::xp },   { Steps::y2,   Steps::x },    { Steps::zp,   Steps::x },    { Steps::y2,   Steps::xp },   { Steps::z,    Steps::x },    { Steps::x,    Steps::NONE },  }, 	// FL
+	{ { Steps::x,    Steps::NONE }, { Steps::x,    Steps::y },    { Steps::x,    Steps::y2 },   { Steps::x,    Steps::yp },   { Steps::x,    Steps::z2 },   { Steps::xp,   Steps::y },    { Steps::xp,   Steps::NONE }, { Steps::xp,   Steps::yp },   { Steps::z2,   Steps::NONE }, { Steps::z2,   Steps::yp },   { Steps::x2,   Steps::NONE }, { Steps::z2,   Steps::y },    { Steps::NONE, Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::zp,   Steps::NONE }, { Steps::x,    Steps::z },    { Steps::x2,   Steps::z },    { Steps::xp,   Steps::z },    { Steps::z,    Steps::NONE }, { Steps::x,    Steps::z },    { Steps::x2,   Steps::z },    { Steps::xp,   Steps::z },  }, 		// BU
+	{ { Steps::z,    Steps::yp },   { Steps::z,    Steps::NONE }, { Steps::z,    Steps::y },    { Steps::z,    Steps::y2 },   { Steps::zp,   Steps::y },    { Steps::zp,   Steps::NONE }, { Steps::zp,   Steps::yp },   { Steps::z,    Steps::x2 },   { Steps::z2,   Steps::y },    { Steps::z2,   Steps::NONE }, { Steps::z2,   Steps::yp },   { Steps::x2,   Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::zp,   Steps::x },    { Steps::x,    Steps::NONE }, { Steps::z,    Steps::x },    { Steps::z2,   Steps::x },    { Steps::z,    Steps::xp },   { Steps::z2,   Steps::xp },   { Steps::zp,   Steps::xp },   { Steps::xp,   Steps::NONE },  }, 	// BR
+	{ { Steps::xp,   Steps::y2 },   { Steps::xp,   Steps::yp },   { Steps::xp,   Steps::NONE }, { Steps::xp,   Steps::y },    { Steps::x,    Steps::NONE }, { Steps::x,    Steps::yp },   { Steps::xp,   Steps::z2 },   { Steps::x,    Steps::y },    { Steps::x2,   Steps::NONE }, { Steps::x2,   Steps::yp },   { Steps::z2,   Steps::NONE }, { Steps::x2,   Steps::y },    { Steps::y2,   Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::x2,   Steps::z },    { Steps::x,    Steps::z },    { Steps::z,    Steps::NONE }, { Steps::xp,   Steps::z },    { Steps::x2,   Steps::z },    { Steps::x,    Steps::z },    { Steps::zp,   Steps::NONE }, { Steps::xp,   Steps::zp },  }, 	// BD
+	{ { Steps::zp,   Steps::y },    { Steps::zp,   Steps::y2 },   { Steps::zp,   Steps::yp },   { Steps::zp,   Steps::NONE }, { Steps::z,    Steps::yp },   { Steps::zp,   Steps::x2 },   { Steps::z,    Steps::y },    { Steps::z,    Steps::NONE }, { Steps::x2,   Steps::y },    { Steps::x2,   Steps::NONE }, { Steps::x2,   Steps::yp },   { Steps::z2,   Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::zp,   Steps::xp },   { Steps::z2,   Steps::xp },   { Steps::z,    Steps::xp },   { Steps::xp,   Steps::NONE }, { Steps::z,    Steps::x },    { Steps::x,    Steps::NONE }, { Steps::zp,   Steps::x },    { Steps::z2,   Steps::x },  }, 		// BL
+	{ { Steps::x,    Steps::y },    { Steps::x,    Steps::y2 },   { Steps::x,    Steps::yp },   { Steps::x,    Steps::NONE }, { Steps::xp,   Steps::y },    { Steps::xp,   Steps::NONE }, { Steps::xp,   Steps::yp },   { Steps::x,    Steps::z2 },   { Steps::zp,   Steps::NONE }, { Steps::xp,   Steps::z },    { Steps::zp,   Steps::y2 },   { Steps::x,    Steps::z },    { Steps::z,    Steps::NONE }, { Steps::xp,   Steps::z },    { Steps::zp,   Steps::x2 },   { Steps::x,    Steps::z },    { Steps::NONE, Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::z2,   Steps::NONE }, { Steps::y,    Steps::z2 },   { Steps::x2,   Steps::NONE }, { Steps::y,    Steps::x2 },  }, 	// RU
+	{ { Steps::z,    Steps::NONE }, { Steps::z,    Steps::y },    { Steps::z,    Steps::y2 },   { Steps::z,    Steps::yp },   { Steps::zp,   Steps::NONE }, { Steps::zp,   Steps::yp },   { Steps::z,    Steps::x2 },   { Steps::zp,   Steps::y },    { Steps::zp,   Steps::x },    { Steps::x,    Steps::y2 },   { Steps::z,    Steps::x },    { Steps::x,    Steps::NONE }, { Steps::z,    Steps::xp },   { Steps::xp,   Steps::NONE }, { Steps::zp,   Steps::xp },   { Steps::x,    Steps::z2 },   { Steps::yp,   Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::yp,   Steps::z2 },   { Steps::z2,   Steps::NONE }, { Steps::yp,   Steps::x2 },   { Steps::x2,   Steps::NONE },  }, 	// RF
+	{ { Steps::xp,   Steps::yp },   { Steps::xp,   Steps::NONE }, { Steps::xp,   Steps::y },    { Steps::xp,   Steps::y2 },   { Steps::x,    Steps::yp },   { Steps::xp,   Steps::z2 },   { Steps::x,    Steps::y },    { Steps::x,    Steps::NONE }, { Steps::z,    Steps::y2 },   { Steps::xp,   Steps::z },    { Steps::z,    Steps::NONE }, { Steps::x,    Steps::z },    { Steps::z,    Steps::x2 },   { Steps::xp,   Steps::z },    { Steps::zp,   Steps::NONE }, { Steps::x,    Steps::z },    { Steps::y2,   Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::x2,   Steps::NONE }, { Steps::yp,   Steps::z2 },   { Steps::z2,   Steps::NONE }, { Steps::yp,   Steps::x2 },  }, 	// RD
+	{ { Steps::zp,   Steps::y2 },   { Steps::zp,   Steps::yp },   { Steps::zp,   Steps::NONE }, { Steps::zp,   Steps::y },    { Steps::zp,   Steps::x2 },   { Steps::z,    Steps::y },    { Steps::z,    Steps::NONE }, { Steps::z,    Steps::yp },   { Steps::zp,   Steps::xp },   { Steps::xp,   Steps::NONE }, { Steps::z,    Steps::xp },   { Steps::xp,   Steps::y2 },   { Steps::z,    Steps::x },    { Steps::xp,   Steps::z2 },   { Steps::zp,   Steps::x },    { Steps::x,    Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::y,    Steps::z2 },   { Steps::x2,   Steps::NONE }, { Steps::y,    Steps::x2 },   { Steps::z2,   Steps::NONE },  }, 	// RB
+	{ { Steps::x,    Steps::yp },   { Steps::x,    Steps::NONE }, { Steps::x,    Steps::y },    { Steps::x,    Steps::y2 },   { Steps::xp,   Steps::yp },   { Steps::x,    Steps::z2 },   { Steps::xp,   Steps::y },    { Steps::xp,   Steps::NONE }, { Steps::z,    Steps::NONE }, { Steps::x,    Steps::z },    { Steps::z,    Steps::y2 },   { Steps::xp,   Steps::z },    { Steps::zp,   Steps::NONE }, { Steps::x,    Steps::z },    { Steps::z,    Steps::x2 },   { Steps::xp,   Steps::z },    { Steps::z2,   Steps::NONE }, { Steps::z2,   Steps::y },    { Steps::x2,   Steps::NONE }, { Steps::z2,   Steps::yp },   { Steps::NONE, Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::y,    Steps::NONE },  }, 	// LU
+	{ { Steps::zp,   Steps::NONE }, { Steps::zp,   Steps::y },    { Steps::zp,   Steps::y2 },   { Steps::zp,   Steps::yp },   { Steps::z,    Steps::NONE }, { Steps::z,    Steps::yp },   { Steps::zp,   Steps::x2 },   { Steps::z,    Steps::y },    { Steps::z,    Steps::x },    { Steps::x,    Steps::NONE }, { Steps::zp,   Steps::x },    { Steps::x,    Steps::y2 },   { Steps::zp,   Steps::xp },   { Steps::x,    Steps::z2 },   { Steps::z,    Steps::xp },   { Steps::xp,   Steps::NONE }, { Steps::z2,   Steps::yp },   { Steps::z2,   Steps::NONE }, { Steps::z2,   Steps::y },    { Steps::x2,   Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::y2,   Steps::NONE },  }, 	// LF
+	{ { Steps::xp,   Steps::y },    { Steps::xp,   Steps::y2 },   { Steps::xp,   Steps::yp },   { Steps::xp,   Steps::NONE }, { Steps::x,    Steps::y },    { Steps::x,    Steps::NONE }, { Steps::x,    Steps::yp },   { Steps::xp,   Steps::z2 },   { Steps::zp,   Steps::y2 },   { Steps::x,    Steps::z },    { Steps::zp,   Steps::NONE }, { Steps::xp,   Steps::z },    { Steps::zp,   Steps::x2 },   { Steps::x,    Steps::z },    { Steps::z,    Steps::NONE }, { Steps::xp,   Steps::z },    { Steps::x2,   Steps::NONE }, { Steps::x2,   Steps::y },    { Steps::z2,   Steps::NONE }, { Steps::x2,   Steps::yp },   { Steps::y2,   Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::NONE, Steps::NONE }, { Steps::yp,   Steps::NONE },  }, 	// LD
+	{ { Steps::z,    Steps::y2 },   { Steps::z,    Steps::yp },   { Steps::z,    Steps::NONE }, { Steps::z,    Steps::y },    { Steps::z,    Steps::x2 },   { Steps::zp,   Steps::y },    { Steps::zp,   Steps::NONE }, { Steps::zp,   Steps::yp },   { Steps::z,    Steps::xp },   { Steps::xp,   Steps::y2 },   { Steps::zp,   Steps::xp },   { Steps::xp,   Steps::NONE }, { Steps::zp,   Steps::x },    { Steps::x,    Steps::NONE }, { Steps::z,    Steps::x },    { Steps::xp,   Steps::z2 },   { Steps::x2,   Steps::yp },   { Steps::x2,   Steps::NONE }, { Steps::x2,   Steps::y },    { Steps::z2,   Steps::NONE }, { Steps::yp,   Steps::NONE }, { Steps::y2,   Steps::NONE }, { Steps::y,    Steps::NONE }, { Steps::NONE, Steps::NONE },  }, 	// LB
 	};
 	
 	const Faces Cube::f_Stickers[54] = // Array to know the solved face of the stickers
@@ -89,6 +118,17 @@ namespace grcube3
 	const char Cube::c_Layers[10] = // Array to know the layer char
 	{
 		'-', 'U', 'D', 'F', 'B', 'R', 'L', 'E', 'S', 'M'
+	};
+
+	// Array with spins string representation
+	const std::string Cube::sp_strings[] =
+	{
+		"UF", "UR", "UB", "UL",
+		"DF", "DR", "DB", "DL",
+		"FU", "FR", "FD", "FL",
+		"BU", "BR", "BD", "BL",
+		"RU", "RF", "RD", "RB",
+		"LU", "LF", "LD", "LB"
 	};
 
 	void Cube::U() // Movement U
@@ -743,15 +783,15 @@ namespace grcube3
 			case Steps::lp: Rp();	x();	return true;
 			case Steps::l2: R2();	x2();	return true;
 
-			case Steps::E:	Up();	D();	y();	return true;
-			case Steps::Ep:	U();	Dp();	yp();	return true;
-			case Steps::E2:	U2();	D2();	y2();	return true;
-			case Steps::S:	F();	Bp();	zp();	return true;
-			case Steps::Sp:	Fp();	B();	z();	return true;
-			case Steps::S2:	F2();	B2();	z2();	return true;
-			case Steps::M:	R();	Lp();	xp();	return true;
-			case Steps::Mp:	Rp();	L();	x();	return true;
-			case Steps::M2:	R2();	L2();	x2();	return true;
+			case Steps::E:	U();	Dp();	yp();	return true; // E -> As layer D
+			case Steps::Ep:	Up();	D();	y();	return true; // E'
+			case Steps::E2:	U2();	D2();	y2();	return true; // E2
+			case Steps::S:	Fp();	B();	z();	return true; // S -> As layer F
+			case Steps::Sp:	F();	Bp();	zp();	return true; // S'
+			case Steps::S2:	F2();	B2();	z2();	return true; // S2
+			case Steps::M:	R();	Lp();	xp();	return true; // M -> As layer L
+			case Steps::Mp:	Rp();	L();	x();	return true; // M'
+			case Steps::M2:	R2();	L2();	x2();	return true; // M2
 
 			case Steps::NONE:
 			case Steps::PARENTHESIS_OPEN:

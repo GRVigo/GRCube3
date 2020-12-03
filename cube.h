@@ -55,6 +55,19 @@ namespace grcube3
 
         // Get cube spin
         Spins GetSpin() const { return spin; }
+
+        // Get cube spin as text
+        std::string GetSpinText() const { return sp_strings[static_cast<int>(spin)]; }
+
+        // Get a given cube spin as text
+        static std::string GetSpinText(Spins s) { return sp_strings[static_cast<int>(s)]; }
+
+        // Get steps to pass from a start spin to a final spin
+        static void GetSpinsSteps(const Spins sS, const Spins sF, Steps &s1, Steps &s2) 
+        { 
+            s1 = s_Turns[static_cast<int>(sS)][static_cast<int>(sF)][0]; 
+            s2 = s_Turns[static_cast<int>(sS)][static_cast<int>(sF)][1];
+        }
 		
         // Reset cube to default status (solved)
         void Reset() { e_Reset(); c_Reset(); spin = Spins::Default; }
@@ -138,35 +151,38 @@ namespace grcube3
 		Faces GetFace_R() const { return Faces::R; }
 
         // Get faces (color) for L center sticker position
-		Faces GetFace_L() const { return Faces::L; }		
+		Faces GetFace_L() const { return Faces::L; }	
+
+        // Set cube spin
+        void SetSpin(Spins s) { spin = s; }
 	
         // Cube x turn
 		void x()  { spin = s_Spins[static_cast<int>(spin)][0]; }
 
-        // Cube x2 turn
-		void x2() { spin = s_Spins[static_cast<int>(spin)][1]; }
-
         // Cube x' turn
-		void xp() { spin = s_Spins[static_cast<int>(spin)][2]; }
-	
+        void xp() { spin = s_Spins[static_cast<int>(spin)][1]; }
+
+        // Cube x2 turn
+		void x2() { spin = s_Spins[static_cast<int>(spin)][2]; }
+
         // Cube y turn
 		void y()  { spin = s_Spins[static_cast<int>(spin)][3]; }
 
-        // Cube y2 turn
-		void y2() { spin = s_Spins[static_cast<int>(spin)][4]; }
-
         // Cube y' turn
-		void yp() { spin = s_Spins[static_cast<int>(spin)][5]; }
-	
+        void yp() { spin = s_Spins[static_cast<int>(spin)][4]; }
+
+        // Cube y2 turn
+		void y2() { spin = s_Spins[static_cast<int>(spin)][5]; }
+
         // Cube z turn
 		void z()  { spin = s_Spins[static_cast<int>(spin)][6]; }
 
-        // Cube z2 turn
-		void z2() { spin = s_Spins[static_cast<int>(spin)][7]; }
-
         // Cube z' turn
-		void zp() { spin = s_Spins[static_cast<int>(spin)][8]; }
-		
+        void zp() { spin = s_Spins[static_cast<int>(spin)][7]; }
+
+        // Cube z2 turn
+		void z2() { spin = s_Spins[static_cast<int>(spin)][8]; }
+
         // Cube U movement
         void U();
 
@@ -277,6 +293,9 @@ namespace grcube3
 			
 		// Array to follow spins when a cube has a turn (24x9 elements array)
 		const static Spins s_Spins[24][9]; 
+
+        // Two turns array for get an spin from an inital spin
+        const static Steps s_Turns[24][24][2];
 		
 		// Array to know the solved face of the stickers
 		const static Faces f_Stickers[54];
@@ -292,5 +311,8 @@ namespace grcube3
 
 		// Array to know the layer char
 		const static char c_Layers[10];
+
+        // Array with spins string representation
+        const static std::string sp_strings[];
 	};
 }
